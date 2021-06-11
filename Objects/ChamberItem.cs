@@ -19,6 +19,7 @@ namespace LinkOS.Objects {
         public void Initialize() {
             IsActive = false;
             IsOnline = true;
+            Destroyed = false;
         }
 
         public void ToggleActive() {
@@ -30,7 +31,5 @@ namespace LinkOS.Objects {
         }
 
         public void Release() { }
-
-        public class Door : ChamberItem { }
     }
 }
