@@ -433,3 +433,6 @@
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/UI/staticHud.png;Sprites/UI/staticHud.png
 
+#begin Levels/level1.txt
+/copy:Levels/level1.txt
+

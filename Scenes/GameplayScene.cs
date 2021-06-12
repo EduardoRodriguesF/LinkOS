@@ -7,14 +7,20 @@ using Pirita.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using static LinkOS.Objects.ChamberItem;
 using static Pirita.Pools.IPoolable;
 
 namespace LinkOS.Scenes {
     public class GameplayScene : Scene {
+        private const int Tile = 16;
+        private readonly string[] _levels = { "level1" };
+        public int Level;
+
         private const int MaxEnergy = 100;
         private int _energy;
+
 
         private Pool<ChamberItem> _chamberItemPool;
         private Pool<Robot> _robotPool;
@@ -94,23 +100,55 @@ namespace LinkOS.Scenes {
         private void GenerateLevel() {
             _energy = MaxEnergy;
 
-            foreach (var item in _chamberItemList) {
-                _chamberItemPool.Release(item);
-            }
-            
-            foreach (var solid in _solidList) {
-                if (!(solid is ChamberItem)) _solidPool.Release(solid);
-            }
-
-            foreach (var robot in _robotList) {
-                _robotPool.Release(robot);
-            }
-
+            CleanPools();
             CleanLists();
 
-            SpawnDoor(0, 0);
-            SpawnRobot(-100, 0);
-            SpawnSolid(64, 64);
+            SpawnStuff();
+
+            void CleanPools() {
+                foreach (var item in _chamberItemList) {
+                    _chamberItemPool.Release(item);
+                }
+
+                foreach (var solid in _solidList) {
+                    if (!(solid is ChamberItem)) _solidPool.Release(solid);
+                }
+
+                foreach (var robot in _robotList) {
+                    _robotPool.Release(robot);
+                }
+            }
+
+            void SpawnStuff() {
+                var rows = File.ReadAllLines(Path.Combine(_contentManager.RootDirectory, "Levels", _levels[Level] + ".txt"));
+
+                int yy = 0;
+                foreach (string r in rows) {
+                    int xx = 0;
+                    foreach (char c in r) {
+                        Spawn(xx * Tile - 256 + 24, yy * Tile - 144 + 32, c);
+                        xx++;
+                    }
+                    yy++;
+                }
+
+                void Spawn(float x, float y, char c) {
+                    switch (c) {
+                        case '@':
+                            SpawnRobot(x, y);
+                            break;
+                        case '#':
+                            SpawnSolid(x, y);
+                            break;
+                        case 'D':
+                            SpawnDoor(x, y);
+                            break;
+                        case 'E':
+                            break;
+                    }
+                }
+            }
+
         }
 
         private void MoveRobots(Direction direction) {
