@@ -29,6 +29,7 @@ namespace LinkOS.Scenes {
         private Button _btnMoveUp;
         private Button _btnMoveDown;
         private Button _btnStop;
+        private Button _btnDoors;
 
         private Texture2D _doorTexture;
 
@@ -64,11 +65,13 @@ namespace LinkOS.Scenes {
             _btnMoveUp = new Button(160, 64, 32, 32) { Texture = _doorTexture };
             _btnMoveDown = new Button(200, 64, 32, 32) { Texture = _doorTexture };
             _btnStop = new Button(216, 76, 32, 32) { Texture = _doorTexture };
+            _btnDoors = new Button(216, 92, 32, 32) { Texture = _doorTexture };
             Hud.AddElement(_btnMoveLeft);
             Hud.AddElement(_btnMoveRight);
             Hud.AddElement(_btnMoveUp);
             Hud.AddElement(_btnMoveDown);
             Hud.AddElement(_btnStop);
+            Hud.AddElement(_btnDoors);
 
             GenerateLevel();
         }
@@ -116,6 +119,10 @@ namespace LinkOS.Scenes {
             _robotList.ForEach(r => r.Stop());
         }
 
+        private void ToggleDoors() {
+            Doors.ForEach(d => d.IsActive = !d.IsActive);
+        }
+
         private void TryAction(EnergyCost energyCost, Action action) {
             TryAction((int)energyCost, action);
         }
@@ -147,6 +154,8 @@ namespace LinkOS.Scenes {
                         TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Down));
                     } else if (mRect.Intersects(_btnStop.Bounds)) {
                         TryAction(EnergyCost.RobotMovement, () => StopRobots());
+                    } else if (mRect.Intersects(_btnDoors.Bounds)) {
+                        TryAction(EnergyCost.DoorToggle, () => ToggleDoors());
                     }
                 }
 
@@ -165,9 +174,7 @@ namespace LinkOS.Scenes {
                 } 
                 
                 if (cmd is GameplayInputCommand.ToggleDoors) {
-                    TryAction(EnergyCost.DoorToggle, () => {
-                        Doors.ForEach(c => c.IsActive = !c.IsActive);
-                    });
+                    TryAction(EnergyCost.DoorToggle, () => ToggleDoors());
                 }
             });
         }
@@ -180,11 +187,16 @@ namespace LinkOS.Scenes {
 
             PostUpdateObjects(gameTime);
 
+            Debug.WriteLine(_solidList.Count);
+
             CleanLists();
         }
 
         private void CheckCollisions() {
-            var filteredList = _solidList;
+            var filteredList = new List<Solid>();
+            _solidList.ForEach(d => {
+                filteredList.Add(d);
+            });
             Doors.ForEach(d => {
                 if (d.IsActive) {
                     if (filteredList.Contains(d)) {
