@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Pirita.Scenes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using static LinkOS.Objects.ChamberItem;
 using static Pirita.Pools.IPoolable;
@@ -26,6 +27,11 @@ namespace LinkOS.Scenes {
             Up,
             Right,
             Down,
+        }
+
+        private enum EnergyCost : int {
+            RobotMovement = 5,
+            DoorToggle = 10,
         }
 
         public override void LoadContent() {
@@ -67,18 +73,29 @@ namespace LinkOS.Scenes {
             }
         }
 
+        private void TryAction(EnergyCost energyCost, Action action) {
+            TryAction((int)energyCost, action);
+        }
+
+        private void TryAction(int energyAmount, Action action) {
+            if (_energy - energyAmount < 0) return;
+
+            action();
+            ConsumeEnergy(energyAmount);
+        }
+
         public override void HandleInput(GameTime gameTime) {
             base.HandleInput(gameTime);
 
             InputManager.GetCommands(cmd => {
                 if (cmd is GameplayInputCommand.Left) {
-                    MoveRobots(Direction.Left);
+                    TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Left));
                 } else if (cmd is GameplayInputCommand.Right) {
-                    MoveRobots(Direction.Right);
+                    TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Right));
                 } else if (cmd is GameplayInputCommand.Up) {
-                    MoveRobots(Direction.Up);
+                    TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Up));
                 } else if (cmd is GameplayInputCommand.Down) {
-                    MoveRobots(Direction.Down);
+                    TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Down));
                 }
             });
         }
@@ -112,6 +129,8 @@ namespace LinkOS.Scenes {
 
         private void ConsumeEnergy(int amount) {
             _energy -= amount;
+
+            Debug.WriteLine(_energy);
         }
 
         protected override void SetInputManager() {
