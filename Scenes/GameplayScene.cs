@@ -31,6 +31,8 @@ namespace LinkOS.Scenes {
         private Button _btnStop;
         private Button _btnDoors;
 
+        private EnergyBar _energyBar;
+
         private Texture2D _doorTexture;
         private Texture2D _solidTexture;
         private Texture2D _robotTexture;
@@ -64,8 +66,6 @@ namespace LinkOS.Scenes {
             _chamberItemPool = new Pool<ChamberItem>(12);
             _solidPool = new Pool<Solid>(24);
 
-            
-
             LoadHud();
 
             GenerateLevel();
@@ -87,8 +87,8 @@ namespace LinkOS.Scenes {
             Hud.AddElement(_btnStop);
             Hud.AddElement(_btnDoors);
 
-            Debug.WriteLine(_btnMoveUp.Bounds);
-
+            _energyBar = new EnergyBar(344, 26, LoadTexture("Sprites/UI/energyBar"));
+            Hud.AddElement(_energyBar);
         }
 
         private void GenerateLevel() {
@@ -172,8 +172,6 @@ namespace LinkOS.Scenes {
                     } else if (mRect.Intersects(_btnDoors.Bounds)) {
                         TryAction(EnergyCost.DoorToggle, () => ToggleDoors());
                     }
-
-                    Debug.WriteLine(mRect);
                 }
 
                 if (cmd is GameplayInputCommand.Left) {
@@ -200,7 +198,9 @@ namespace LinkOS.Scenes {
             UpdateObjects(gameTime);
 
             CheckCollisions();
+
             Hud.Update(Camera.Position, Camera.Zoom);
+            _energyBar.Update(_energy);
 
             PostUpdateObjects(gameTime);
 
@@ -281,8 +281,6 @@ namespace LinkOS.Scenes {
 
         private void ConsumeEnergy(int amount) {
             _energy -= amount;
-
-            Debug.WriteLine(_energy);
         }
 
         protected override void SetInputManager() {
