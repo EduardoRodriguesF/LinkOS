@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Pirita.Objects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace LinkOS.Objects {
@@ -15,18 +16,18 @@ namespace LinkOS.Objects {
         public override int Height => _bounds.Height;
 
         public Rectangle Bounds {
-            get => new Rectangle((int)(Position.X + InitialPosition.X), (int)(Position.Y + InitialPosition.Y), Width, Height);
+            get => new Rectangle((int)(Position.X), (int)(Position.Y), (int)(Width*Scale.X), (int)(Height*Scale.Y));
             private set => _bounds = value; 
         }
 
         public Button(int x, int y, int width, int height) {
-            Position = new Vector2(x, y);
-            Bounds = new Rectangle(x, y, width, height);
+            Position = new Vector2(x, y) * 2;
+            Bounds = new Rectangle((int)Position.X, (int)Position.Y, width, height);
         }
 
         public override void Render(SpriteBatch spriteBatch) {
             if (Texture != null)
-                spriteBatch.Draw(Texture, Bounds, new Rectangle(0, 0, Width, Height), Color.White, Rotation, Origin, SpriteEffects.None, 1);
+                spriteBatch.Draw(Texture, Position, new Rectangle(0, 0, Width, Height), Color.White, Rotation, Origin, Scale, SpriteEffects.None, 0);
         }
     }
 }

@@ -60,12 +60,22 @@ namespace LinkOS.Scenes {
             _chamberItemPool = new Pool<ChamberItem>(12);
             _solidPool = new Pool<Solid>(24);
 
-            _btnMoveLeft = new Button(64, 64, 32, 32) { Texture = _doorTexture };
-            _btnMoveRight = new Button(100, 64, 32, 32) { Texture = _doorTexture };
-            _btnMoveUp = new Button(160, 64, 32, 32) { Texture = _doorTexture };
-            _btnMoveDown = new Button(200, 64, 32, 32) { Texture = _doorTexture };
-            _btnStop = new Button(216, 76, 32, 32) { Texture = _doorTexture };
-            _btnDoors = new Button(216, 92, 32, 32) { Texture = _doorTexture };
+            
+
+            LoadHud();
+
+            GenerateLevel();
+        }
+
+        private void LoadHud() {
+            Hud.AddElement(new HudElement(0, 0, LoadTexture("Sprites/UI/staticHud")));
+
+            _btnMoveLeft = new Button(184, 48, 16, 16) { Texture = LoadTexture("Sprites/UI/Buttons/left") };
+            _btnMoveRight = new Button(220, 48, 16, 16) { Texture = LoadTexture("Sprites/UI/Buttons/right") };
+            _btnMoveUp = new Button(202, 30, 16, 16) { Texture = LoadTexture("Sprites/UI/Buttons/up") };
+            _btnMoveDown = new Button(202, 66, 16, 16) { Texture = LoadTexture("Sprites/UI/Buttons/down") };
+            _btnStop = new Button(202, 48, 16, 16) { Texture = LoadTexture("Sprites/UI/Buttons/stop") };
+            _btnDoors = new Button(172, 90, 38, 17) { Texture = LoadTexture("Sprites/UI/Buttons/doors") };
             Hud.AddElement(_btnMoveLeft);
             Hud.AddElement(_btnMoveRight);
             Hud.AddElement(_btnMoveUp);
@@ -73,7 +83,8 @@ namespace LinkOS.Scenes {
             Hud.AddElement(_btnStop);
             Hud.AddElement(_btnDoors);
 
-            GenerateLevel();
+            Debug.WriteLine(_btnMoveUp.Bounds);
+
         }
 
         private void GenerateLevel() {
@@ -157,6 +168,8 @@ namespace LinkOS.Scenes {
                     } else if (mRect.Intersects(_btnDoors.Bounds)) {
                         TryAction(EnergyCost.DoorToggle, () => ToggleDoors());
                     }
+
+                    Debug.WriteLine(mRect);
                 }
 
                 if (cmd is GameplayInputCommand.Left) {
@@ -186,8 +199,6 @@ namespace LinkOS.Scenes {
             Hud.Update(Camera.Position, Camera.Zoom);
 
             PostUpdateObjects(gameTime);
-
-            Debug.WriteLine(_solidList.Count);
 
             CleanLists();
         }
