@@ -67,6 +67,8 @@ namespace LinkOS.Scenes {
                 _robotPool.Release(robot);
             }
 
+            CleanLists();
+
             SpawnDoor(0, 0);
             SpawnRobot(-100, 0);
             SpawnSolid(64, 64);
@@ -127,9 +129,7 @@ namespace LinkOS.Scenes {
 
             PostUpdateObjects(gameTime);
 
-            _chamberItemList = CleanObjects(_chamberItemList);
-            _robotList = CleanObjects(_robotList);
-            _solidList = CleanObjects(_solidList);
+            CleanLists();
         }
 
         private void CheckCollisions() {
@@ -199,6 +199,12 @@ namespace LinkOS.Scenes {
 
         protected override void SetInputManager() {
             InputManager = new Pirita.Input.InputManager(new GameplayInputMapper());
+        }
+
+        private void CleanLists() {
+            _chamberItemList = CleanObjects(_chamberItemList);
+            _robotList = CleanObjects(_robotList);
+            _solidList = CleanObjects(_solidList);
         }
     }
 }
