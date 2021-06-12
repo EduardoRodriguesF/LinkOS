@@ -32,6 +32,8 @@ namespace LinkOS.Scenes {
         private Button _btnDoors;
 
         private Texture2D _doorTexture;
+        private Texture2D _solidTexture;
+        private Texture2D _robotTexture;
 
         private Vector2 _mousePos;
 
@@ -50,7 +52,9 @@ namespace LinkOS.Scenes {
         }
 
         public override void LoadContent() {
-            _doorTexture = LoadTexture("placeholder");
+            _doorTexture = LoadTexture("Sprites/Map/door");
+            _robotTexture = LoadTexture("Sprites/Map/robot");
+            _solidTexture = LoadTexture("Sprites/Map/solid");
 
             _robotList = new List<Robot>();
             _chamberItemList = new List<ChamberItem>();
@@ -262,7 +266,7 @@ namespace LinkOS.Scenes {
         private void SpawnRobot(float x, float y) {
             var robot = _robotPool.Get();
             robot.Position = new Vector2(x, y);
-            robot.SetTexture(_doorTexture);
+            robot.SetTexture(_robotTexture);
             _robotList.Add(robot);
             AddObject(robot);
         }
@@ -270,7 +274,7 @@ namespace LinkOS.Scenes {
         private void SpawnSolid(float x, float y) {
             var solid = _solidPool.Get();
             solid.Position = new Vector2(x, y);
-            solid.SetTexture(_doorTexture);
+            solid.SetTexture(_solidTexture);
             _solidList.Add(solid);
             AddObject(solid);
         }
@@ -283,6 +287,10 @@ namespace LinkOS.Scenes {
 
         protected override void SetInputManager() {
             InputManager = new Pirita.Input.InputManager(new GameplayInputMapper());
+        }
+
+        protected override void SetCamera() {
+            base.SetCamera();
         }
 
         private void CleanLists() {

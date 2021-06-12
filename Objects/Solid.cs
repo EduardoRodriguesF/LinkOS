@@ -11,7 +11,8 @@ namespace LinkOS.Objects {
         public bool PoolIsFree { get; set; }
 
         public Solid() {
-            AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 16, 16));
+            Scale = new Vector2(2);
+            AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 8, 8));
         }
 
         public virtual void Initialize() {

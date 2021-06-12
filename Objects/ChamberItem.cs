@@ -16,7 +16,8 @@ namespace LinkOS.Objects {
 
         public ChamberItem() {
             Initialize();
-            AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 16, 16));
+            Scale = new Vector2(2);
+            AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 8, 8));
         }
 
         public override void Initialize() {
