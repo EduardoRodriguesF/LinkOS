@@ -24,7 +24,11 @@ namespace LinkOS.Scenes {
         private List<Robot> _robotList;
         private List<Solid> _solidList;
 
+        private Button _btnMoveRight;
+
         private Texture2D _doorTexture;
+
+        private Vector2 _mousePos;
 
         private enum Direction {
             Left,
@@ -48,6 +52,9 @@ namespace LinkOS.Scenes {
             _robotPool = new Pool<Robot>(2);
             _chamberItemPool = new Pool<ChamberItem>(12);
             _solidPool = new Pool<Solid>(24);
+
+            _btnMoveRight = new Button(128, 64, 32, 32) { Texture = _doorTexture };
+            Hud.AddElement(_btnMoveRight);
 
             GenerateLevel();
         }
@@ -105,6 +112,12 @@ namespace LinkOS.Scenes {
         public override void HandleInput(GameTime gameTime) {
             base.HandleInput(gameTime);
 
+            var m = InputManager.GetMousePosition();
+            _mousePos.X = (int)((m.X + Camera.Position.X - (Viewport.Width / 2)) / Camera.Zoom);
+            _mousePos.Y = (int)((m.Y + Camera.Position.Y - (Viewport.Height / 2)) / Camera.Zoom);
+
+            Debug.WriteLine(_mousePos);
+
             InputManager.GetCommands(cmd => {
                 if (cmd is GameplayInputCommand.Left) {
                     TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Left));
@@ -126,6 +139,7 @@ namespace LinkOS.Scenes {
             UpdateObjects(gameTime);
 
             CheckCollisions();
+            Hud.Update(Camera.Position, Camera.Zoom);
 
             PostUpdateObjects(gameTime);
 
