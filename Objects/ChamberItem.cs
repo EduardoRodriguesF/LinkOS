@@ -9,6 +9,10 @@ namespace LinkOS.Objects {
     public class ChamberItem : Solid, IPoolable {
         public bool IsActive { get; set; }
         public bool IsOnline { get; set; }
+        public ItemType Type { get; set; }
+        public enum ItemType : int {
+            Door = 0,
+        }
 
         public ChamberItem() {
             Initialize();

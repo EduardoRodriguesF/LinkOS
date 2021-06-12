@@ -25,6 +25,9 @@ namespace LinkOS.Scenes {
             if (Pressed(Keys.R, state, oldState))
                 commands.Add(new GameplayInputCommand.Restart());
 
+            if (Pressed(Keys.H, state, oldState))
+                commands.Add(new GameplayInputCommand.ToggleDoors());
+
             return commands;
         }
 

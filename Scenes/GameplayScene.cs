@@ -34,6 +34,8 @@ namespace LinkOS.Scenes {
 
         private Vector2 _mousePos;
 
+        public List<ChamberItem> Doors => _chamberItemList.FindAll(c => c.Type == ItemType.Door);
+
         private enum Direction {
             Left,
             Up,
@@ -132,8 +134,6 @@ namespace LinkOS.Scenes {
             _mousePos.X = (int)((m.X + Camera.Position.X - (Viewport.Width / 2)) / Camera.Zoom);
             _mousePos.Y = (int)((m.Y + Camera.Position.Y - (Viewport.Height / 2)) / Camera.Zoom);
 
-            Debug.WriteLine(_mousePos);
-
             InputManager.GetCommands(cmd => {
                 if (cmd is GameplayInputCommand.Click) {
                     var mRect = new Rectangle((int)_mousePos.X, (int)_mousePos.Y, 1, 1);
@@ -162,6 +162,12 @@ namespace LinkOS.Scenes {
 
                 if (cmd is GameplayInputCommand.Restart) {
                     GenerateLevel();
+                } 
+                
+                if (cmd is GameplayInputCommand.ToggleDoors) {
+                    TryAction(EnergyCost.DoorToggle, () => {
+                        Doors.ForEach(c => c.IsActive = !c.IsActive);
+                    });
                 }
             });
         }
@@ -178,7 +184,15 @@ namespace LinkOS.Scenes {
         }
 
         private void CheckCollisions() {
-            var robotsCD = new AABBCollisionDetector<Solid, Robot>(_solidList);
+            var filteredList = _solidList;
+            Doors.ForEach(d => {
+                if (d.IsActive) {
+                    if (filteredList.Contains(d)) {
+                        filteredList.Remove(d);
+                    }
+                }
+            });
+            var robotsCD = new AABBCollisionDetector<Solid, Robot>(filteredList);
 
             Vector2 pos;
             int velDir;
@@ -211,9 +225,11 @@ namespace LinkOS.Scenes {
             }
         }
 
-        private void SpawnDoor(float x, float y) {
+        private void SpawnDoor(float x, float y, bool active = false) {
             var door = _chamberItemPool.Get();
+            door.Type = ChamberItem.ItemType.Door;
             door.Position = new Vector2(x, y);
+            door.IsActive = active;
             door.SetTexture(_doorTexture);
             _chamberItemList.Add(door);
             _solidList.Add(door);
