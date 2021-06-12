@@ -1,14 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Pirita.Objects;
+using Pirita.Pools;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LinkOS.Objects {
-    public class Robot : GameObject {
+    public class Robot : GameObject, IPoolable {
         private const float Speed = 1f;
 
         public Vector2 Velocity;
+
+        public bool PoolIsValid { get; set; }
+        public bool PoolIsFree { get; set; }
 
         public void MoveLeft() {
             Stop();
@@ -36,6 +40,15 @@ namespace LinkOS.Objects {
 
         public override void PostUpdate(GameTime gameTime) {
             Position += Velocity;
+        }
+
+        public void Initialize() {
+            Velocity = Vector2.Zero;
+            Destroyed = false;
+        }
+
+        public void Release() {
+            Destroy();
         }
     }
 }

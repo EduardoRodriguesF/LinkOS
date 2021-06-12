@@ -16,8 +16,9 @@ namespace LinkOS.Scenes {
         private int _energy;
 
         private Pool<ChamberItem> _chamberItemPool;
-        private List<ChamberItem> _chamberItemList;
+        private Pool<Robot> _robotPool;
 
+        private List<ChamberItem> _chamberItemList;
         private List<Robot> _robotList;
 
         private Texture2D _doorTexture;
@@ -39,7 +40,8 @@ namespace LinkOS.Scenes {
 
             _robotList = new List<Robot>();
             _chamberItemList = new List<ChamberItem>();
-            
+
+            _robotPool = new Pool<Robot>(2);
             _chamberItemPool = new Pool<ChamberItem>(12);
 
             GenerateLevel();
@@ -50,6 +52,10 @@ namespace LinkOS.Scenes {
 
             foreach (var item in _chamberItemList) {
                 _chamberItemPool.Release(item);
+            }
+
+            foreach (var robot in _robotList) {
+                _robotPool.Release(robot);
             }
 
             SpawnDoor(0, 0);
@@ -97,6 +103,10 @@ namespace LinkOS.Scenes {
                 } else if (cmd is GameplayInputCommand.Down) {
                     TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Down));
                 }
+
+                if (cmd is GameplayInputCommand.Restart) {
+                    GenerateLevel();
+                }
             });
         }
 
@@ -119,7 +129,7 @@ namespace LinkOS.Scenes {
         }
 
         private void SpawnRobot(float x, float y) {
-            var robot = new Robot();
+            var robot = _robotPool.Get();
             robot.Position = new Vector2(x, y);
             robot.SetTexture(_doorTexture);
             robot.AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 16, 16));

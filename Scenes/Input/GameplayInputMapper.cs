@@ -22,6 +22,9 @@ namespace LinkOS.Scenes {
             if (Pressed(Keys.S, state, oldState))
                 commands.Add(new GameplayInputCommand.Down());
 
+            if (Pressed(Keys.R, state, oldState))
+                commands.Add(new GameplayInputCommand.Restart());
+
             return commands;
         }
     }

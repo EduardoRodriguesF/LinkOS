@@ -30,6 +30,8 @@ namespace LinkOS.Objects {
             IsOnline = !IsOnline;
         }
 
-        public void Release() { }
+        public void Release() {
+            Destroy();
+        }
     }
 }

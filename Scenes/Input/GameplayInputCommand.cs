@@ -9,5 +9,6 @@ namespace LinkOS.Scenes.Input {
         public class Right : InputCommand { }
         public class Up : InputCommand { }
         public class Down : InputCommand { }
+        public class Restart : InputCommand { }
     }
 }
