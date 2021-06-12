@@ -2,6 +2,7 @@
 using LinkOS.Scenes.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Pirita.Collision;
 using Pirita.Scenes;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,11 @@ namespace LinkOS.Scenes {
 
         private Pool<ChamberItem> _chamberItemPool;
         private Pool<Robot> _robotPool;
+        private Pool<Solid> _solidPool;
 
         private List<ChamberItem> _chamberItemList;
         private List<Robot> _robotList;
+        private List<Solid> _solidList;
 
         private Texture2D _doorTexture;
 
@@ -40,9 +43,11 @@ namespace LinkOS.Scenes {
 
             _robotList = new List<Robot>();
             _chamberItemList = new List<ChamberItem>();
+            _solidList = new List<Solid>();
 
             _robotPool = new Pool<Robot>(2);
             _chamberItemPool = new Pool<ChamberItem>(12);
+            _solidPool = new Pool<Solid>(24);
 
             GenerateLevel();
         }
@@ -53,6 +58,10 @@ namespace LinkOS.Scenes {
             foreach (var item in _chamberItemList) {
                 _chamberItemPool.Release(item);
             }
+            
+            foreach (var solid in _solidList) {
+                if (!(solid is ChamberItem)) _solidPool.Release(solid);
+            }
 
             foreach (var robot in _robotList) {
                 _robotPool.Release(robot);
@@ -60,6 +69,7 @@ namespace LinkOS.Scenes {
 
             SpawnDoor(0, 0);
             SpawnRobot(-100, 0);
+            SpawnSolid(64, 64);
         }
 
         private void MoveRobots(Direction direction) {
@@ -113,18 +123,55 @@ namespace LinkOS.Scenes {
         public override void UpdateGameState(GameTime gameTime) {
             UpdateObjects(gameTime);
 
+            CheckCollisions();
+
             PostUpdateObjects(gameTime);
 
             _chamberItemList = CleanObjects(_chamberItemList);
             _robotList = CleanObjects(_robotList);
+            _solidList = CleanObjects(_solidList);
+        }
+
+        private void CheckCollisions() {
+            var robotsCD = new AABBCollisionDetector<Solid, Robot>(_solidList);
+
+            Vector2 pos;
+            int velDir;
+            foreach (var robot in _robotList) {
+                pos = new Vector2(robot.Velocity.X, 0);
+
+                if (robotsCD.DetectCollisions(robot, pos)) {
+                    velDir = Math.Sign(robot.Velocity.X);
+                    pos.X = velDir;
+
+                    while (!robotsCD.DetectCollisions(robot, pos)) {
+                        robot.Position += new Vector2(velDir, 0);
+                    }
+
+                    robot.Velocity.X = 0;
+                }
+
+                pos = new Vector2(0, robot.Velocity.Y);
+
+                if (robotsCD.DetectCollisions(robot, pos)) {
+                    velDir = Math.Sign(robot.Velocity.Y);
+                    pos.Y = velDir;
+
+                    while (!robotsCD.DetectCollisions(robot, pos)) {
+                        robot.Position += new Vector2(0, velDir);
+                    }
+
+                    robot.Velocity.Y = 0;
+                }
+            }
         }
 
         private void SpawnDoor(float x, float y) {
             var door = _chamberItemPool.Get();
             door.Position = new Vector2(x, y);
             door.SetTexture(_doorTexture);
-            door.AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 16, 16));
             _chamberItemList.Add(door);
+            _solidList.Add(door);
             AddObject(door);
         }
 
@@ -132,9 +179,16 @@ namespace LinkOS.Scenes {
             var robot = _robotPool.Get();
             robot.Position = new Vector2(x, y);
             robot.SetTexture(_doorTexture);
-            robot.AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 16, 16));
             _robotList.Add(robot);
             AddObject(robot);
+        }
+
+        private void SpawnSolid(float x, float y) {
+            var solid = _solidPool.Get();
+            solid.Position = new Vector2(x, y);
+            solid.SetTexture(_doorTexture);
+            _solidList.Add(solid);
+            AddObject(solid);
         }
 
         private void ConsumeEnergy(int amount) {

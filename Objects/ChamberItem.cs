@@ -1,22 +1,22 @@
-﻿using Pirita.Objects;
+﻿using Microsoft.Xna.Framework;
+using Pirita.Objects;
 using Pirita.Pools;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LinkOS.Objects {
-    public class ChamberItem : GameObject, IPoolable {
+    public class ChamberItem : Solid, IPoolable {
         public bool IsActive { get; set; }
         public bool IsOnline { get; set; }
 
-        public bool PoolIsValid { get; set; }
-        public bool PoolIsFree { get; set; }
-
         public ChamberItem() {
             Initialize();
+            AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 16, 16));
         }
 
-        public void Initialize() {
+        public override void Initialize() {
+            base.Initialize();
             IsActive = false;
             IsOnline = true;
             Destroyed = false;
@@ -28,10 +28,6 @@ namespace LinkOS.Objects {
 
         public void ToggleConnection() {
             IsOnline = !IsOnline;
-        }
-
-        public void Release() {
-            Destroy();
         }
     }
 }

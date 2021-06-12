@@ -14,6 +14,10 @@ namespace LinkOS.Objects {
         public bool PoolIsValid { get; set; }
         public bool PoolIsFree { get; set; }
 
+        public Robot() {
+            AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 16, 16));
+        }
+
         public void MoveLeft() {
             Stop();
             Velocity.X = -Speed;
