@@ -13,41 +13,11 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../_SPRITE/corpse wars/ICON.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/corpse wars/ICON.png;placeholder.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/Map/door.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/Map/door.png;Sprites/Map/door.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/Map/door.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/Map/door.png;Sprites/Map/door.png
+#begin ../../../../_Sounds/linkOS.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../../../../_Sounds/linkOS.wav;Sounds/song.wav
 
 #begin ../../../../_SPRITE/LinkOS/Pngs/Map/door.png
 /importer:TextureImporter
@@ -72,54 +42,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/Map/exit.png;Sprites/Map/exit.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/Map/exit.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/Map/exit.png;Sprites/Map/exit.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/Map/exit.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/Map/exit.png;Sprites/Map/exit.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/Map/robot.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/Map/robot.png;Sprites/Map/robot.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/Map/robot.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/Map/robot.png;Sprites/Map/robot.png
 
 #begin ../../../../_SPRITE/LinkOS/Pngs/Map/robot.png
 /importer:TextureImporter
@@ -145,30 +67,6 @@
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/Map/solid.png;Sprites/Map/solid.png
 
-#begin ../../../../_SPRITE/LinkOS/Pngs/Map/solid.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/Map/solid.png;Sprites/Map/solid.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/doors.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/doors.png;Sprites/UI/Buttons/doors.png
-
 #begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/doors.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -193,30 +91,6 @@
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/down.png;Sprites/UI/Buttons/down.png
 
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/down.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/down.png;Sprites/UI/Buttons/down.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/down.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/down.png;Sprites/UI/Buttons/down.png
-
 #begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/left.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -228,54 +102,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/left.png;Sprites/UI/Buttons/left.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/left.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/left.png;Sprites/UI/Buttons/left.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/left.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/left.png;Sprites/UI/Buttons/left.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/right.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/right.png;Sprites/UI/Buttons/right.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/right.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/right.png;Sprites/UI/Buttons/right.png
 
 #begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/right.png
 /importer:TextureImporter
@@ -301,54 +127,6 @@
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/stop.png;Sprites/UI/Buttons/stop.png
 
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/stop.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/stop.png;Sprites/UI/Buttons/stop.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/stop.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/stop.png;Sprites/UI/Buttons/stop.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/up.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/up.png;Sprites/UI/Buttons/up.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/up.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/up.png;Sprites/UI/Buttons/up.png
-
 #begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/up.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -373,30 +151,6 @@
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/UI/energyBar.png;Sprites/UI/energyBar.png
 
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/energyBar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/energyBar.png;Sprites/UI/energyBar.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/energyBar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/energyBar.png;Sprites/UI/energyBar.png
-
 #begin ../../../../_SPRITE/LinkOS/Pngs/UI/staticHud.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -408,31 +162,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/UI/staticHud.png;Sprites/UI/staticHud.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/staticHud.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/staticHud.png;Sprites/UI/staticHud.png
-
-#begin ../../../../_SPRITE/LinkOS/Pngs/UI/staticHud.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../_SPRITE/LinkOS/Pngs/UI/staticHud.png;Sprites/UI/staticHud.png
-
-#begin Levels/level1.txt
-/copy:Levels/level1.txt
 

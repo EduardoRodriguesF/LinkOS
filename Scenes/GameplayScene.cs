@@ -60,6 +60,11 @@ namespace LinkOS.Scenes {
         }
 
         public override void LoadContent() {
+            var music = LoadSound("Sounds/song").CreateInstance();
+            music.IsLooped = true;
+            music.Volume = 0.8f;
+            music.Play();
+
             _doorTexture = LoadTexture("Sprites/Map/door");
             _robotTexture = LoadTexture("Sprites/Map/robot");
             _solidTexture = LoadTexture("Sprites/Map/solid");
@@ -120,7 +125,14 @@ namespace LinkOS.Scenes {
             }
 
             void SpawnStuff() {
-                var rows = File.ReadAllLines(Path.Combine(_contentManager.RootDirectory, "Levels", _levels[Level] + ".txt"));
+                //var rows = File.ReadAllLines(Path.Combine(_contentManager.RootDirectory, "Levels", _levels[Level] + ".txt"));
+                var stream = TitleContainer.OpenStream("Levels/" + _levels[Level] + ".txt");
+                var reader = new StreamReader(stream);
+                List<string> rows = new List<string>();
+                string line;
+                while ((line = reader.ReadLine()) != null) {
+                    rows.Add(line);
+                }
 
                 int yy = 0;
                 foreach (string r in rows) {
@@ -142,6 +154,9 @@ namespace LinkOS.Scenes {
                             break;
                         case 'D':
                             SpawnDoor(x, y);
+                            break;
+                        case 'C':
+                            SpawnDoor(x, y, true);
                             break;
                         case 'E':
                             break;
@@ -173,7 +188,7 @@ namespace LinkOS.Scenes {
         }
 
         private void ToggleDoors() {
-            Doors.ForEach(d => d.IsActive = !d.IsActive);
+            Doors.ForEach(d => d.ToggleActive());
         }
 
         private void TryAction(EnergyCost energyCost, Action action) {
@@ -294,7 +309,7 @@ namespace LinkOS.Scenes {
             var door = _chamberItemPool.Get();
             door.Type = ChamberItem.ItemType.Door;
             door.Position = new Vector2(x, y);
-            door.IsActive = active;
+            door.SetActive(active);
             door.SetTexture(_doorTexture);
             _chamberItemList.Add(door);
             _solidList.Add(door);

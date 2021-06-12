@@ -28,7 +28,12 @@ namespace LinkOS.Objects {
         }
 
         public void ToggleActive() {
-            IsActive = !IsActive;
+            SetActive(!IsActive);
+        }
+
+        public void SetActive(bool active) {
+            IsActive = active;
+            if (Type == ItemType.Door) Opacity = !active ? 1f : 0f;
         }
 
         public void ToggleConnection() {
