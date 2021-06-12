@@ -1,4 +1,5 @@
 ﻿using LinkOS.Objects;
+using LinkOS.Scenes.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pirita.Scenes;
@@ -16,23 +17,70 @@ namespace LinkOS.Scenes {
         private Pool<ChamberItem> _chamberItemPool;
         private List<ChamberItem> _chamberItemList;
 
+        private List<Robot> _robotList;
+
         private Texture2D _doorTexture;
+
+        private enum Direction {
+            Left,
+            Up,
+            Right,
+            Down,
+        }
 
         public override void LoadContent() {
             _doorTexture = LoadTexture("placeholder");
 
-            _chamberItemPool = new Pool<ChamberItem>(12);
+            _robotList = new List<Robot>();
             _chamberItemList = new List<ChamberItem>();
+            
+            _chamberItemPool = new Pool<ChamberItem>(12);
 
             GenerateLevel();
         }
 
         private void GenerateLevel() {
+            _energy = MaxEnergy;
+
             foreach (var item in _chamberItemList) {
                 _chamberItemPool.Release(item);
             }
 
             SpawnDoor(0, 0);
+            SpawnRobot(-100, 0);
+        }
+
+        private void MoveRobots(Direction direction) {
+            switch (direction) {
+                case Direction.Left:
+                    _robotList.ForEach(r => r.MoveLeft());
+                    break;
+                case Direction.Right:
+                    _robotList.ForEach(r => r.MoveRight());
+                    break;
+                case Direction.Up:
+                    _robotList.ForEach(r => r.MoveUp());
+                    break;
+                case Direction.Down:
+                    _robotList.ForEach(r => r.MoveDown());
+                    break;
+            }
+        }
+
+        public override void HandleInput(GameTime gameTime) {
+            base.HandleInput(gameTime);
+
+            InputManager.GetCommands(cmd => {
+                if (cmd is GameplayInputCommand.Left) {
+                    MoveRobots(Direction.Left);
+                } else if (cmd is GameplayInputCommand.Right) {
+                    MoveRobots(Direction.Right);
+                } else if (cmd is GameplayInputCommand.Up) {
+                    MoveRobots(Direction.Up);
+                } else if (cmd is GameplayInputCommand.Down) {
+                    MoveRobots(Direction.Down);
+                }
+            });
         }
 
         public override void UpdateGameState(GameTime gameTime) {
@@ -41,6 +89,7 @@ namespace LinkOS.Scenes {
             PostUpdateObjects(gameTime);
 
             _chamberItemList = CleanObjects(_chamberItemList);
+            _robotList = CleanObjects(_robotList);
         }
 
         private void SpawnDoor(float x, float y) {
@@ -50,6 +99,19 @@ namespace LinkOS.Scenes {
             door.AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 16, 16));
             _chamberItemList.Add(door);
             AddObject(door);
+        }
+
+        private void SpawnRobot(float x, float y) {
+            var robot = new Robot();
+            robot.Position = new Vector2(x, y);
+            robot.SetTexture(_doorTexture);
+            robot.AddHitbox(new Pirita.Collision.Hitbox(Vector2.Zero, 16, 16));
+            _robotList.Add(robot);
+            AddObject(robot);
+        }
+
+        private void ConsumeEnergy(int amount) {
+            _energy -= amount;
         }
 
         protected override void SetInputManager() {
