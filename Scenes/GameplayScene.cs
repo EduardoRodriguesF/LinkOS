@@ -28,6 +28,7 @@ namespace LinkOS.Scenes {
         private Button _btnMoveRight;
         private Button _btnMoveUp;
         private Button _btnMoveDown;
+        private Button _btnStop;
 
         private Texture2D _doorTexture;
 
@@ -60,10 +61,12 @@ namespace LinkOS.Scenes {
             _btnMoveRight = new Button(100, 64, 32, 32) { Texture = _doorTexture };
             _btnMoveUp = new Button(160, 64, 32, 32) { Texture = _doorTexture };
             _btnMoveDown = new Button(200, 64, 32, 32) { Texture = _doorTexture };
+            _btnStop = new Button(216, 76, 32, 32) { Texture = _doorTexture };
             Hud.AddElement(_btnMoveLeft);
             Hud.AddElement(_btnMoveRight);
             Hud.AddElement(_btnMoveUp);
             Hud.AddElement(_btnMoveDown);
+            Hud.AddElement(_btnStop);
 
             GenerateLevel();
         }
@@ -107,6 +110,10 @@ namespace LinkOS.Scenes {
             }
         }
 
+        private void StopRobots() {
+            _robotList.ForEach(r => r.Stop());
+        }
+
         private void TryAction(EnergyCost energyCost, Action action) {
             TryAction((int)energyCost, action);
         }
@@ -138,6 +145,8 @@ namespace LinkOS.Scenes {
                         TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Up));
                     } else if (mRect.Intersects(_btnMoveDown.Bounds)) {
                         TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Down));
+                    } else if (mRect.Intersects(_btnStop.Bounds)) {
+                        TryAction(EnergyCost.RobotMovement, () => StopRobots());
                     }
                 }
 
