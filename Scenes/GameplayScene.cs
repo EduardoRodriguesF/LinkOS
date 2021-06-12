@@ -24,7 +24,10 @@ namespace LinkOS.Scenes {
         private List<Robot> _robotList;
         private List<Solid> _solidList;
 
+        private Button _btnMoveLeft;
         private Button _btnMoveRight;
+        private Button _btnMoveUp;
+        private Button _btnMoveDown;
 
         private Texture2D _doorTexture;
 
@@ -53,8 +56,14 @@ namespace LinkOS.Scenes {
             _chamberItemPool = new Pool<ChamberItem>(12);
             _solidPool = new Pool<Solid>(24);
 
-            _btnMoveRight = new Button(128, 64, 32, 32) { Texture = _doorTexture };
+            _btnMoveLeft = new Button(64, 64, 32, 32) { Texture = _doorTexture };
+            _btnMoveRight = new Button(100, 64, 32, 32) { Texture = _doorTexture };
+            _btnMoveUp = new Button(160, 64, 32, 32) { Texture = _doorTexture };
+            _btnMoveDown = new Button(200, 64, 32, 32) { Texture = _doorTexture };
+            Hud.AddElement(_btnMoveLeft);
             Hud.AddElement(_btnMoveRight);
+            Hud.AddElement(_btnMoveUp);
+            Hud.AddElement(_btnMoveDown);
 
             GenerateLevel();
         }
@@ -119,6 +128,19 @@ namespace LinkOS.Scenes {
             Debug.WriteLine(_mousePos);
 
             InputManager.GetCommands(cmd => {
+                if (cmd is GameplayInputCommand.Click) {
+                    var mRect = new Rectangle((int)_mousePos.X, (int)_mousePos.Y, 1, 1);
+                    if (mRect.Intersects(_btnMoveLeft.Bounds)) {
+                        TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Left));
+                    } else if (mRect.Intersects(_btnMoveRight.Bounds)) {
+                        TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Right));
+                    } else if (mRect.Intersects(_btnMoveUp.Bounds)) {
+                        TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Up));
+                    } else if (mRect.Intersects(_btnMoveDown.Bounds)) {
+                        TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Down));
+                    }
+                }
+
                 if (cmd is GameplayInputCommand.Left) {
                     TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Left));
                 } else if (cmd is GameplayInputCommand.Right) {

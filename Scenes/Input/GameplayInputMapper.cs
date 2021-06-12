@@ -27,5 +27,15 @@ namespace LinkOS.Scenes {
 
             return commands;
         }
+
+        public override IEnumerable<InputCommand> GetMouseState(MouseState state, MouseState oldState) {
+            var commands = new List<InputCommand>();
+
+            if (Pressed(state.LeftButton, oldState.LeftButton)) {
+                commands.Add(new GameplayInputCommand.Click());
+            }
+
+            return commands;
+        }
     }
 }

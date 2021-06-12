@@ -20,6 +20,7 @@ namespace LinkOS.Objects {
         }
 
         public Button(int x, int y, int width, int height) {
+            Position = new Vector2(x, y);
             Bounds = new Rectangle(x, y, width, height);
         }
 
