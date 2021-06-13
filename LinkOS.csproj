@@ -15,13 +15,17 @@
     <None Remove="Levels\level1.txt" />
     <None Remove="Levels\level2.txt" />
     <None Remove="Levels\level3.txt" />
+    <None Remove="Levels\level4.txt" />
     <None Remove="Levels\template.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Levels\level2.txt">
+    <Content Include="Levels\level4.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Levels\level3.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\level2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Levels\template.txt">
