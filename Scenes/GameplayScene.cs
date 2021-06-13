@@ -219,7 +219,7 @@ namespace LinkOS.Scenes {
             Doors.ForEach(d => d.ToggleActive());
             SoundManager.OnNotify(new GameplayEvent.DoorsToggle());
 
-            var pos = _btnDoors.InitialPosition == new Vector2(172, 90)*2 ? new Vector2(210, 90)*2 : new Vector2(172, 90)*2;
+            var pos = _btnDoors.InitialPosition == new Vector2(172, 90) * 2 ? new Vector2(210, 90) * 2 : new Vector2(172, 90) * 2;
             _btnDoors.InitialPosition = pos;
         }
 
