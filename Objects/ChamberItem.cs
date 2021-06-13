@@ -12,6 +12,8 @@ namespace LinkOS.Objects {
         public ItemType Type { get; set; }
         public enum ItemType : int {
             Door = 0,
+            Exit = 1,
+            Button = 2,
         }
 
         public ChamberItem() {

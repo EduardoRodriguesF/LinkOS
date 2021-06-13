@@ -8,7 +8,7 @@ using System.Text;
 
 namespace LinkOS.Objects {
     public class Robot : GameObject, IPoolable {
-        private const float Speed = 1f;
+        private const float Speed = 10f;
 
         public Vector2 Velocity;
 

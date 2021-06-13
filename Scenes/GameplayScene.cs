@@ -15,8 +15,15 @@ using static Pirita.Pools.IPoolable;
 namespace LinkOS.Scenes {
     public class GameplayScene : Scene {
         private const int Tile = 16;
-        private readonly string[] _levels = { "level1" };
-        public int Level;
+
+        private int _level;
+        public int Level {
+            get => _level;
+            set {
+                _level = value;
+                GenerateLevel();
+            }
+        }
 
         private const int MaxEnergy = 100;
         private int _energy;
@@ -30,6 +37,8 @@ namespace LinkOS.Scenes {
         private List<Robot> _robotList;
         private List<Solid> _solidList;
 
+        private ChamberItem _exit;
+
         private Button _btnMoveLeft;
         private Button _btnMoveRight;
         private Button _btnMoveUp;
@@ -42,6 +51,7 @@ namespace LinkOS.Scenes {
         private Texture2D _doorTexture;
         private Texture2D _solidTexture;
         private Texture2D _robotTexture;
+        private Texture2D _exitTexture;
 
         private Vector2 _mousePos;
 
@@ -55,7 +65,7 @@ namespace LinkOS.Scenes {
         }
 
         private enum EnergyCost : int {
-            RobotMovement = 5,
+            RobotMovement = 10,
             DoorToggle = 10,
         }
 
@@ -68,10 +78,16 @@ namespace LinkOS.Scenes {
             _doorTexture = LoadTexture("Sprites/Map/door");
             _robotTexture = LoadTexture("Sprites/Map/robot");
             _solidTexture = LoadTexture("Sprites/Map/solid");
+            _exitTexture = LoadTexture("Sprites/Map/exit");
 
             _robotList = new List<Robot>();
             _chamberItemList = new List<ChamberItem>();
             _solidList = new List<Solid>();
+            _exit = new ChamberItem() {
+                Type = ItemType.Exit,
+            };
+            _exit.SetTexture(_exitTexture);
+            AddObject(_exit);
 
             _robotPool = new Pool<Robot>(2);
             _chamberItemPool = new Pool<ChamberItem>(12);
@@ -125,8 +141,8 @@ namespace LinkOS.Scenes {
             }
 
             void SpawnStuff() {
-                //var rows = File.ReadAllLines(Path.Combine(_contentManager.RootDirectory, "Levels", _levels[Level] + ".txt"));
-                var stream = TitleContainer.OpenStream("Levels/" + _levels[Level] + ".txt");
+                var l = Level + 1;
+                var stream = TitleContainer.OpenStream("Levels/level" + l + ".txt");
                 var reader = new StreamReader(stream);
                 List<string> rows = new List<string>();
                 string line;
@@ -159,6 +175,7 @@ namespace LinkOS.Scenes {
                             SpawnDoor(x, y, true);
                             break;
                         case 'E':
+                            SpawnExit(x, y);
                             break;
                     }
                 }
@@ -196,7 +213,11 @@ namespace LinkOS.Scenes {
         }
 
         private void TryAction(int energyAmount, Action action) {
-            if (_energy - energyAmount < 0) return;
+            var robotsAreMoving = false;
+            foreach (var robot in _robotList) {
+                if (robot.Velocity != Vector2.Zero) robotsAreMoving = true;
+            }
+            if (_energy - energyAmount < 0 || robotsAreMoving) return;
 
             action();
             ConsumeEnergy(energyAmount);
@@ -272,6 +293,7 @@ namespace LinkOS.Scenes {
                     }
                 }
             });
+
             var robotsCD = new AABBCollisionDetector<Solid, Robot>(filteredList);
 
             Vector2 pos;
@@ -303,6 +325,10 @@ namespace LinkOS.Scenes {
                     robot.Velocity.Y = 0;
                 }
             }
+
+            foreach (var robot in _robotList) {
+                if (robot.Hitboxes[0].CollidesWith(_exit.Hitboxes[0])) Level++;
+            }
         }
 
         private void SpawnDoor(float x, float y, bool active = false) {
@@ -330,6 +356,10 @@ namespace LinkOS.Scenes {
             solid.SetTexture(_solidTexture);
             _solidList.Add(solid);
             AddObject(solid);
+        }
+
+        private void SpawnExit(float x, float y) {
+            _exit.Position = new Vector2(x, y);
         }
 
         private void ConsumeEnergy(int amount) {
