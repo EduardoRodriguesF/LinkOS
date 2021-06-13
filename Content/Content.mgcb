@@ -13,11 +13,35 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../../_Sounds/buttonLinkOS.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../../../../_Sounds/buttonLinkOS.wav;Sounds/button.wav
+
 #begin ../../../../_Sounds/linkOS.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:../../../../_Sounds/linkOS.wav;Sounds/song.wav
+
+#begin ../../../../_Sounds/switchLinkOS.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../../../../_Sounds/switchLinkOS.wav;Sounds/switch.wav
+
+#begin ../../../../_SPRITE/LinkOS/Pngs/Map/button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../_SPRITE/LinkOS/Pngs/Map/button.png;Sprites/Map/button.png
 
 #begin ../../../../_SPRITE/LinkOS/Pngs/Map/button.png
 /importer:TextureImporter
@@ -54,6 +78,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/Map/door.png;Sprites/Map/door.png
+
+#begin ../../../../_SPRITE/LinkOS/Pngs/Map/doorButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../_SPRITE/LinkOS/Pngs/Map/doorButton.png;Sprites/Map/doorButton.png
 
 #begin ../../../../_SPRITE/LinkOS/Pngs/Map/doorButton.png
 /importer:TextureImporter
@@ -210,6 +246,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/left.png;Sprites/UI/Buttons/left.png
+
+#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/reset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/reset.png;Sprites/UI/Buttons/reset.png
 
 #begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/right.png
 /importer:TextureImporter

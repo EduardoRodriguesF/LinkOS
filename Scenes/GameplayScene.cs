@@ -45,6 +45,7 @@ namespace LinkOS.Scenes {
         private Button _btnMoveDown;
         private Button _btnStop;
         private Button _btnDoors;
+        private Button _btnReset;
 
         private EnergyBar _energyBar;
 
@@ -74,6 +75,9 @@ namespace LinkOS.Scenes {
             music.IsLooped = true;
             music.Volume = 0.8f;
             music.Play();
+
+            SoundManager.RegisterSound(new GameplayEvent.RobotsMoved(), LoadSound("Sounds/button"));
+            SoundManager.RegisterSound(new GameplayEvent.DoorsToggle(), LoadSound("Sounds/switch"));
 
             _doorTexture = LoadTexture("Sprites/Map/door");
             _robotTexture = LoadTexture("Sprites/Map/robot");
@@ -107,12 +111,14 @@ namespace LinkOS.Scenes {
             _btnMoveDown = new Button(202, 66, 16, 16) { Texture = LoadTexture("Sprites/UI/Buttons/down") };
             _btnStop = new Button(202, 48, 16, 16) { Texture = LoadTexture("Sprites/UI/Buttons/stop") };
             _btnDoors = new Button(172, 90, 38, 17) { Texture = LoadTexture("Sprites/UI/Buttons/doors") };
+            _btnReset = new Button(235, 27, 9, 10) { Texture = LoadTexture("Sprites/UI/Buttons/reset") };
             Hud.AddElement(_btnMoveLeft);
             Hud.AddElement(_btnMoveRight);
             Hud.AddElement(_btnMoveUp);
             Hud.AddElement(_btnMoveDown);
             Hud.AddElement(_btnStop);
             Hud.AddElement(_btnDoors);
+            Hud.AddElement(_btnReset);
 
             _energyBar = new EnergyBar(344, 26, LoadTexture("Sprites/UI/energyBar"));
             Hud.AddElement(_energyBar);
@@ -198,6 +204,7 @@ namespace LinkOS.Scenes {
                     _robotList.ForEach(r => r.MoveDown());
                     break;
             }
+            SoundManager.OnNotify(new GameplayEvent.RobotsMoved());
         }
 
         private void StopRobots() {
@@ -206,6 +213,7 @@ namespace LinkOS.Scenes {
 
         private void ToggleDoors() {
             Doors.ForEach(d => d.ToggleActive());
+            SoundManager.OnNotify(new GameplayEvent.DoorsToggle());
         }
 
         private void TryAction(EnergyCost energyCost, Action action) {
@@ -245,6 +253,8 @@ namespace LinkOS.Scenes {
                         TryAction(EnergyCost.RobotMovement, () => StopRobots());
                     } else if (mRect.Intersects(_btnDoors.Bounds)) {
                         TryAction(EnergyCost.DoorToggle, () => ToggleDoors());
+                    } else if (mRect.Intersects(_btnReset.Bounds)) {
+                        GenerateLevel();
                     }
                 }
 
