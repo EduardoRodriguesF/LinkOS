@@ -14,6 +14,7 @@ namespace LinkOS.Scenes {
     public class GameplayScene : Scene {
         private const int Tile = 16;
 
+        private const int TotalLevels = 5;
         private int _level;
         public int Level {
             get => _level;
@@ -97,7 +98,7 @@ namespace LinkOS.Scenes {
 
             LoadHud();
 
-            GenerateLevel();
+            Level = 0;
         }
 
         private void LoadHud() {
@@ -146,6 +147,11 @@ namespace LinkOS.Scenes {
 
             void SpawnStuff() {
                 var l = Level + 1;
+                if (l > TotalLevels) {
+                    AddDrawableObject(new HudElement(-256 + 22, -144 + 32, LoadTexture("Sprites/UI/credits")) { Scale = new Vector2(2) }, 10);
+
+                    return;
+                }
                 var stream = TitleContainer.OpenStream("Levels/level" + l + ".txt");
                 var reader = new StreamReader(stream);
                 List<string> rows = new List<string>();
@@ -212,6 +218,9 @@ namespace LinkOS.Scenes {
         private void ToggleDoors() {
             Doors.ForEach(d => d.ToggleActive());
             SoundManager.OnNotify(new GameplayEvent.DoorsToggle());
+
+            var pos = _btnDoors.InitialPosition == new Vector2(172, 90)*2 ? new Vector2(210, 90)*2 : new Vector2(172, 90)*2;
+            _btnDoors.InitialPosition = pos;
         }
 
         private void TryAction(EnergyCost energyCost, Action action) {

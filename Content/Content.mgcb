@@ -259,6 +259,18 @@
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/reset.png;Sprites/UI/Buttons/reset.png
 
+#begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/reset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/reset.png;Sprites/UI/Buttons/reset.png
+
 #begin ../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/right.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -330,6 +342,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../../../_SPRITE/LinkOS/Pngs/UI/Buttons/up.png;Sprites/UI/Buttons/up.png
+
+#begin ../../../../_SPRITE/LinkOS/Pngs/UI/credits.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../_SPRITE/LinkOS/Pngs/UI/credits.png;Sprites/UI/credits.png
 
 #begin ../../../../_SPRITE/LinkOS/Pngs/UI/energyBar.png
 /importer:TextureImporter
