@@ -6,9 +6,7 @@ using Pirita.Collision;
 using Pirita.Scenes;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Text;
 using static LinkOS.Objects.ChamberItem;
 using static Pirita.Pools.IPoolable;
 
@@ -250,7 +248,7 @@ namespace LinkOS.Scenes {
                     } else if (mRect.Intersects(_btnMoveDown.Bounds)) {
                         TryAction(EnergyCost.RobotMovement, () => MoveRobots(Direction.Down));
                     } else if (mRect.Intersects(_btnStop.Bounds)) {
-                        TryAction(EnergyCost.RobotMovement, () => StopRobots());
+                        //TryAction(EnergyCost.RobotMovement, () => StopRobots());
                     } else if (mRect.Intersects(_btnDoors.Bounds)) {
                         TryAction(EnergyCost.DoorToggle, () => ToggleDoors());
                     } else if (mRect.Intersects(_btnReset.Bounds)) {
@@ -270,8 +268,8 @@ namespace LinkOS.Scenes {
 
                 if (cmd is GameplayInputCommand.Restart) {
                     GenerateLevel();
-                } 
-                
+                }
+
                 if (cmd is GameplayInputCommand.ToggleDoors) {
                     TryAction(EnergyCost.DoorToggle, () => ToggleDoors());
                 }

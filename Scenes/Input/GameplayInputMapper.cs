@@ -1,14 +1,12 @@
 ﻿using LinkOS.Scenes.Input;
 using Microsoft.Xna.Framework.Input;
 using Pirita.Input;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LinkOS.Scenes {
     public class GameplayInputMapper : InputMapper {
         public override IEnumerable<InputCommand> GetKeyboardState(KeyboardState state, KeyboardState oldState) {
-            var commands = (List<InputCommand>) base.GetKeyboardState(state, oldState);
+            var commands = (List<InputCommand>)base.GetKeyboardState(state, oldState);
 
             if (Pressed(Keys.A, state, oldState))
                 commands.Add(new GameplayInputCommand.Left());

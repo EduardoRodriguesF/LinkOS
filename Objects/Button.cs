@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pirita.Objects;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace LinkOS.Objects {
     public class Button : Drawable {
@@ -16,8 +12,8 @@ namespace LinkOS.Objects {
         public override int Height => _bounds.Height;
 
         public Rectangle Bounds {
-            get => new Rectangle((int)(Position.X), (int)(Position.Y), (int)(Width*Scale.X), (int)(Height*Scale.Y));
-            private set => _bounds = value; 
+            get => new Rectangle((int)(Position.X), (int)(Position.Y), (int)(Width * Scale.X), (int)(Height * Scale.Y));
+            private set => _bounds = value;
         }
 
         public Button(int x, int y, int width, int height) {

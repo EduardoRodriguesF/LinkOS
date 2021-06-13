@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pirita.Objects;
 using Pirita.Pools;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace LinkOS.Objects {
     public class Robot : GameObject, IPoolable {
@@ -29,12 +25,12 @@ namespace LinkOS.Objects {
             Stop();
             Velocity.X = Speed;
         }
-        
+
         public void MoveUp() {
             Stop();
             Velocity.Y = -Speed;
         }
-        
+
         public void MoveDown() {
             Stop();
             Velocity.Y = Speed;

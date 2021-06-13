@@ -2,8 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Pirita.Objects;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LinkOS.Objects {
     public class HudElement : Drawable {

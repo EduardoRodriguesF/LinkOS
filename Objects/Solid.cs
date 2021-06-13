@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pirita.Objects;
 using Pirita.Pools;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LinkOS.Objects {
     public class Solid : GameObject, IPoolable {
