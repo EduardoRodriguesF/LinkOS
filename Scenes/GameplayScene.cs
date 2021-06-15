@@ -14,7 +14,7 @@ namespace LinkOS.Scenes {
     public class GameplayScene : Scene {
         private const int Tile = 16;
 
-        private const int TotalLevels = 5;
+        private const int TotalLevels = 6;
         private int _level;
         public int Level {
             get => _level;
